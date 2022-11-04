@@ -1,6 +1,6 @@
-import { MovieDTO } from "../../../domain/repositories/interfaces/movie-repository.interface";
-import { IMovieService } from "../../services/movie-service";
-import { IUseCase } from "../interfaces/use-case-interface";
+import { MovieDTO } from "../../../../domain/repositories/interfaces/movie-repository.interface";
+import { IMovieService } from "../../../services/movie-service";
+import { IUseCase } from "../../interfaces/use-case-interface";
 
 export interface movieRequest {
     title: string;
