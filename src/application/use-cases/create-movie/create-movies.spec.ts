@@ -1,15 +1,22 @@
+import { MovieRepositoryInMemory } from "../../../domain/repositories/in-memory/movies.repos";
+import { IMovieRepository } from "../../../domain/repositories/interfaces/movie-repository.interface";
+import { IMovieService, MovieService } from "../../services/movie-service";
 import { CreateMovieUseCase, ICreateMovieUseCase } from "./create-movie.use-cases";
 
 let sut: ICreateMovieUseCase;
+let service: IMovieService;
+let repository: IMovieRepository;
 
 describe("Create Movie Use Case", () => {
 
     beforeEach(() => {
-        sut = new CreateMovieUseCase();
+        repository = new MovieRepositoryInMemory();
+        service = new MovieService(repository);
+        sut = new CreateMovieUseCase(service);
     })
 
     it("Should be able to create a movies", async () => {
-        
+
         const data = {
             title: "Movie One",
             describe: "Description Movie One",
@@ -22,5 +29,4 @@ describe("Create Movie Use Case", () => {
         expect(movie).toHaveProperty("id");
 
     });
-
 })
