@@ -1,7 +1,7 @@
 import { MovieRepositoryInMemory } from "../../../../domain/repositories/in-memory/movies.repos";
 import { IMovieRepository } from "../../../../domain/repositories/interfaces/movie-repository.interface";
 import { IMovieService, MovieService } from "../../../services/movies-service";
-import { CreateMovieUseCase, ICreateMovieUseCase } from "./create-movie.use-cases";
+import { CreateMovieUseCase, ICreateMovieUseCase } from "./create-movie.use-case";
 
 let sut: ICreateMovieUseCase;
 let service: IMovieService;
