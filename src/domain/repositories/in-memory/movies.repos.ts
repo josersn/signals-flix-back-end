@@ -1,4 +1,4 @@
-import { Movie } from "../../entities/movies";
+import { Movie } from "../../entities/movie";
 import { IMovieRepository, MovieDTO } from "../interfaces/movie-repository.interface";
 
 class MovieRepositoryInMemory implements IMovieRepository {
