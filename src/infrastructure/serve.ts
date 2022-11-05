@@ -24,10 +24,10 @@ export default async () => {
         origin: '*',
     })
 
-    // await app.register(bootstrap, {
-    //     directory: resolve(__dirname, '..'),
-    //     mask: /\.controller\.[j|t]s$/
-    // })
+    await app.register(bootstrap, {
+        directory: resolve(__dirname),
+        mask: /\.controller\.[j|t]s$/
+    })
 
     app.get("/", async (req, reply) => {
         reply.status(200).send("Welcome to Signals Flix API");
