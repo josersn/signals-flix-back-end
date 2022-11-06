@@ -25,6 +25,14 @@ class UserRepositoryInMemory implements IUserRepository {
 
         return user;
     }
+
+
+    async findBy({ where }: any): Promise<UserDTO | undefined> {
+        const key = Object.keys(where)[0];
+        const value = Object.values(where)[0];
+
+        return this.users.find(user => user[key] === value);
+    }
 }
 
 export { UserRepositoryInMemory }

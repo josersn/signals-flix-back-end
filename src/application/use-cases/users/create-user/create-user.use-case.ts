@@ -14,11 +14,18 @@ class CreateUserUseCase implements ICreateUserUseCase {
 
     private readonly userService: IUserService;
 
-    constructor(userService) {
+    constructor(userService: IUserService) {
         this.userService = userService;
     }
 
-    exec(payload: IUserRequest): Promise<UserDTO> {
+    async exec(payload: IUserRequest): Promise<UserDTO> {
+
+        const userAlreadyExists = await this.userService.findByEmail(payload.email);
+        
+        if(userAlreadyExists) {
+            throw new Error("Email Already Exists");
+        }
+
         return this.userService.create(payload)
     }
 

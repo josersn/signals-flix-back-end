@@ -2,6 +2,7 @@ import { IUserRepository, UserDTO } from "../../domain/repositories/interfaces/u
 
 interface IUserService {
     create(data: UserDTO): Promise<UserDTO>
+    findByEmail(email: string): Promise<UserDTO | undefined>
 }
 
 class UserService implements IUserService {
@@ -12,8 +13,16 @@ class UserService implements IUserService {
         this.userRepository = userRepository;
     }
 
-    create(data: UserDTO): Promise<UserDTO> {
+    async create(data: UserDTO): Promise<UserDTO> {
         return this.userRepository.create(data);
+    }
+
+    async findByEmail(email: string): Promise<UserDTO | undefined> {
+        return this.userRepository.findBy({
+            where: {
+                email
+            }
+        });
     }
 }
 

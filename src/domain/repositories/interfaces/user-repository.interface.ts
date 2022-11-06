@@ -1,5 +1,6 @@
 interface IUserRepository {
     create(data: UserDTO): Promise<UserDTO>
+    findBy(where: any): Promise<UserDTO | undefined>
 }
 
 interface UserDTO {

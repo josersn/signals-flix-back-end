@@ -23,10 +23,20 @@ describe("Create User use case", () => {
         }
 
         const user = await sut.exec(data);
-        
-        
+
+
         expect(user).toBeTruthy();
         expect(user).toHaveProperty("id");
     });
 
+    it("Should not be able to create a user if email already exists", async () => {
+        const data = {
+            email: "mock_user@hotmail.com",
+            password: "mockPassword",
+        }
+
+        await sut.exec(data);
+
+        await expect(sut.exec(data)).rejects.toThrowError(Error("Email Already Exists"));
+    })
 })
