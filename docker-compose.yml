@@ -1,5 +1,20 @@
-version: '3.8'
+version: "3.8"
 services:
+  # app:
+  #   build: .
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  #   links:
+  #     - postgres
+  #     - redis
+  #   command: npm run dev
+  #   ports:
+  #     - ${APP_PORT}:${APP_PORT}
+  #     - 9229:9229
+  #   volumes:
+  #     - .:/usr/app
+  #     - /usr/app/nodu_modules
   postgres:
     image: postgres:10.3
     restart: always
@@ -9,6 +24,14 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
+      - "5432:5432"
+  redis:
+    image: bitnami/redis:latest
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    expose:
+    - ${REDIS_PORT}
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
 volumes:
   postgres:
