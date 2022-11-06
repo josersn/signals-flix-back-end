@@ -8,8 +8,8 @@ class PlansRepositoryPrisma implements IPlansRepository {
         return prisma.plans.findMany();
     }
 
-    async save(data: PlanDTO): Promise<PlanDTO> {
-        return await prisma.plans.create({
+    async save(data: PlanDTO): Promise<Plan> {
+        return prisma.plans.create({
             data
         })
     }
