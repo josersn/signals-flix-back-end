@@ -1,5 +1,5 @@
 class Plan {
-    id: string;
+    id: BigInt;
     title: string;
     description: string;
     price: number;

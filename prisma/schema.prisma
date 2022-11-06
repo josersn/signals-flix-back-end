@@ -22,3 +22,14 @@ model Users {
 
   @@map("users")
 }
+
+model Plans {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  price       Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("plans")
+}

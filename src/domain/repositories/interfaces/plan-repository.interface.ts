@@ -6,7 +6,7 @@ interface IPlansRepository {
 }
 
 interface PlanDTO {
-    id?: string;
+    id?: BigInt;
     title: string;
     description: string;
     price: number;
