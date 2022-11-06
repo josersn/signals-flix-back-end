@@ -16,7 +16,7 @@ export default class UserController {
             const useCase = new CreateUserUseCase(service);
 
             const user = await useCase.exec(req.body);
-            
+
             // @ts-expect-error 
             delete user.password
 
@@ -24,8 +24,11 @@ export default class UserController {
                 message: "User Created",
                 data: user
             })
-        } catch (error) {
-            console.log(error)
+        } catch (error: any) {
+            return reply.status(error.code).send({
+                error: true,
+                message: error.message
+            })
         }
     }
 }

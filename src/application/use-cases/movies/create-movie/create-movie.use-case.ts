@@ -1,4 +1,5 @@
 import { MovieDTO } from "../../../../domain/repositories/interfaces/movie-repository.interface";
+import ApiError from "../../../core/ApiError";
 import { IMovieService } from "../../../services/movies-service";
 import { IUseCase } from "../../interfaces/use-case-interface";
 
@@ -30,7 +31,7 @@ class CreateMovieUseCase implements ICreateMovieUseCase {
             return movie;
 
         } catch (error) {
-            throw new Error("Erro to create movie")
+            throw new ApiError(500, 500, "Error to create movie")
         }
     }
 }

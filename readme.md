@@ -1,7 +1,9 @@
-[X] seeds
-[X] cache
+[X] Seeds
+[X] Cache
 [X] Redis
 [ ] Error handler
-[ ] fastify erro handler
+[ ] Fastify erro handler
+[ ] Auth
 [ ] JWT
 [ ] ts-path-config
+[ ] Movies script
