@@ -4,7 +4,6 @@ import { PlanService } from "../../application/services/plan-service";
 import { ListPlansUseCase } from "../../application/use-cases/plans/list-plans/list-plans.use-cases";
 import { CreatePlanUseCase } from "../../application/use-cases/plans/create-plan/create-plan.use-case";
 import { PlansRepositoryPrisma } from "../database/prisma/repositories/plans-repository.prisma";
-import { prisma } from '../database/prisma';
 import { redisClient } from '../database/redis';
 
 @Controller('/plans')

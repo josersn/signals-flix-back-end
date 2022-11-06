@@ -1,8 +1,8 @@
 [X] Seeds
 [X] Cache
 [X] Redis
-[ ] Error handler
-[ ] Fastify erro handler
+[X] Error handler
+[X] Fastify erro handler
 [ ] Auth
 [ ] JWT
 [ ] ts-path-config
