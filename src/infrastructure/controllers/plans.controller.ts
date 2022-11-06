@@ -43,6 +43,8 @@ export default class PlansController {
         const service = new PlanService(repository);
         const useCase = new CreatePlanUseCase(service);
 
-        return useCase.exec(req.body);
+        const plan = await useCase.exec(req.body);
+
+        return reply.status(201).send(plan);
     }
 }
