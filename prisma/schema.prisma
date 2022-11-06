@@ -11,14 +11,16 @@ datasource db {
 }
 
 model Users {
-  id        BigInt   @id @default(autoincrement())
-  name      String
+  id        Int      @id @default(autoincrement())
+  planId    Int?
+  name      String   @default("Meu perfil")
   email     String
-  phone     String
-  document  String
-  isActive  Boolean  @default(false)
+  password  String
+  phone     String?
+  isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  plan      Plans?   @relation(fields: [planId], references: [id])
 
   @@map("users")
 }
@@ -30,6 +32,7 @@ model Plans {
   price       Int
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Users       Users[]
 
   @@map("plans")
 }
