@@ -1,17 +1,21 @@
 import { UserRepositoryInMemory } from "../../../../domain/repositories/in-memory/users.repos";
 import { IUserRepository } from "../../../../domain/repositories/interfaces/user-repository.interface";
+import { Encryption } from "../../../../infrastructure/providers/encryption";
+import { IEncryption } from "../../../../infrastructure/providers/encryption/interface";
 import { IUserService, UserService } from "../../../services/user-service";
 import { CreateUserUseCase, ICreateUserUseCase } from "./create-user.use-case";
 
 let sut: ICreateUserUseCase;
 let service: IUserService;
 let repository: IUserRepository;
+let encryptionProvider: IEncryption;
 
 describe("Create User use case", () => {
 
     beforeEach(() => {
         repository = new UserRepositoryInMemory();
-        service = new UserService(repository);
+        encryptionProvider = new Encryption();
+        service = new UserService(repository, encryptionProvider);
         sut = new CreateUserUseCase(service);
     })
 

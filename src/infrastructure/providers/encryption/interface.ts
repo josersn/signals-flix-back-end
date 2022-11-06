@@ -1,6 +1,6 @@
 interface IEncryption {
-    crypt(value: string): Promise<string>
-    decrypt(value: string, hash: string): Promise<boolean>
+    crypt(value: String): Promise<String>
+    decrypt(value: String, hash: String): Promise<Boolean>
 }
 
 export { IEncryption }
