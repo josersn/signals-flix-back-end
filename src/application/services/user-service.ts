@@ -4,6 +4,7 @@ import { IEncryption } from "../../infrastructure/providers/encryption/interface
 interface IUserService {
     create(data: UserDTO): Promise<UserDTO>
     findByEmail(email: string): Promise<UserDTO | undefined>
+    comparePassword(password: string, hash): Promise<Boolean>
 }
 
 class UserService implements IUserService {
@@ -29,6 +30,10 @@ class UserService implements IUserService {
                 email
             }
         });
+    }
+
+    async comparePassword(password: string, hash: string): Promise<Boolean> {
+        return this.encryptionProvider.decrypt(password, hash);
     }
 }
 

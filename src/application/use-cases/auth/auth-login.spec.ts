@@ -26,16 +26,42 @@ describe("Auth Login User case", () => {
 
 
     it("Should be able to have secrets to login", async () => {
+        const data = {
+            email: "nettorammos@hotmail.com",
+            password: "mock_password"
+        }
+
+        await createUserUseCase.exec(data);
+
+        data.password = "mock_password"
+
+        const { token } = await sut.exec(data);
+
+
+        expect(token).toBeTruthy();
+
+    })
+
+    it("Should return error if user not exists", async () => {
+
+        const user = {
+            email: "nettorammos@hotmail.com",
+            password: "mock_password"
+        }
+
+        await expect(sut.exec(user)).rejects.toThrowError(Error("User not found"));
+    })
+
+    it("Should return error if provide wrong password", async () => {
         const user = {
             email: "nettorammos@hotmail.com",
             password: "mock_password"
         }
 
         await createUserUseCase.exec(user);
-        const { token } = await sut.exec(user);
+        
+        user.password = "wrong_password"
 
-
-        expect(token).toBeTruthy();
-
+        await expect(sut.exec(user)).rejects.toThrowError(Error("User not found"));
     })
 })

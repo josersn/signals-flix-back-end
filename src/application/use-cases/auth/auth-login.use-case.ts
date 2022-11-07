@@ -1,3 +1,4 @@
+import ApiError from "../../core/ApiError";
 import { IUserService } from "../../services/user-service";
 import { IUseCase } from "../interfaces/use-case-interface";
 
@@ -22,6 +23,16 @@ class AuthLoginUseCase implements IAuthLoginUseCase {
 
     async exec(payload: IAuthRequest): Promise<IAuthResponse> {
         const user = await this.userService.findByEmail(payload.email);
+
+        if(!user) {
+            throw new ApiError(404, 404, "User not found")
+        }
+
+        const comparePassword = await this.userService.comparePassword(payload.password, user.password);
+
+        if(!comparePassword) {
+            throw new ApiError(404, 404, "User not found")
+        }
 
         return {
             token: String(Math.random())
