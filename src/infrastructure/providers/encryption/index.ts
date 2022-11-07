@@ -1,4 +1,4 @@
-import { BcryptProvider } from "./implementation/bcrypt";
+import { BcryptProvider } from "./implementations/bcrypt";
 
 class Encryption extends BcryptProvider { }
 
