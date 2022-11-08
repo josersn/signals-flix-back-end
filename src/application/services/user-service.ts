@@ -5,16 +5,19 @@ interface IUserService {
     create(data: UserDTO): Promise<UserDTO>
     findByEmail(email: string): Promise<UserDTO | undefined>
     comparePassword(password: string, hash): Promise<Boolean>
+    generateToken(payload: any): Promise<any>
 }
 
 class UserService implements IUserService {
 
     private readonly userRepository: IUserRepository;
     private readonly encryptionProvider: IEncryption;
+    private readonly tokenizationProvider: ITokenization;
 
-    constructor(userRepository, encryptionProvider) {
+    constructor(userRepository: IUserRepository, encryptionProvider: IEncryption, tokenizationProvider: ITokenization) {
         this.userRepository = userRepository;
-        this.encryptionProvider = encryptionProvider
+        this.encryptionProvider = encryptionProvider;
+        this.tokenizationProvider = tokenizationProvider;
     }
 
     async create(data: UserDTO): Promise<UserDTO> {
@@ -34,6 +37,10 @@ class UserService implements IUserService {
 
     async comparePassword(password: string, hash: string): Promise<Boolean> {
         return this.encryptionProvider.decrypt(password, hash);
+    }
+
+    async generateToken(payload: any): Promise<any> {
+        return this.tokenizationProvider.sign(payload)
     }
 }
 

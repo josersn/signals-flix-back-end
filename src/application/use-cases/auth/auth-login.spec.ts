@@ -2,6 +2,7 @@ import { UserRepositoryInMemory } from "../../../domain/repositories/in-memory/u
 import { IUserRepository } from "../../../domain/repositories/interfaces/user-repository.interface";
 import { Encryption } from "../../../infrastructure/providers/encryption";
 import { IEncryption } from "../../../infrastructure/providers/encryption/interface";
+import { Tokenization } from "../../../infrastructure/providers/tokenization";
 import { IUserService, UserService } from "../../services/user-service";
 import { CreateUserUseCase, ICreateUserUseCase } from "../users/create-user/create-user.use-case";
 import { AuthLoginUseCase, IAuthLoginUseCase } from "./auth-login.use-case";
@@ -9,7 +10,8 @@ import { AuthLoginUseCase, IAuthLoginUseCase } from "./auth-login.use-case";
 let repository: IUserRepository;
 let service: IUserService;
 let createUserUseCase: ICreateUserUseCase;
-let encryption: IEncryption;
+let encryptionProvider: IEncryption;
+let tokenizationProvider: ITokenization;
 let sut: IAuthLoginUseCase;
 
 
@@ -18,8 +20,9 @@ describe("Auth Login User case", () => {
 
     beforeEach(() => {
         repository = new UserRepositoryInMemory();
-        encryption = new Encryption();
-        service = new UserService(repository, encryption);
+        encryptionProvider = new Encryption();
+        tokenizationProvider = new Tokenization(String(process.env.SECRET), Number(process.env.expiresIn));
+        service = new UserService(repository, encryptionProvider, tokenizationProvider);
         createUserUseCase = new CreateUserUseCase(service);
         sut = new AuthLoginUseCase(service);
     })
@@ -59,7 +62,7 @@ describe("Auth Login User case", () => {
         }
 
         await createUserUseCase.exec(user);
-        
+
         user.password = "wrong_password"
 
         await expect(sut.exec(user)).rejects.toThrowError(Error("User not found"));

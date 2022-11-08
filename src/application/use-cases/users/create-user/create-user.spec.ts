@@ -2,6 +2,7 @@ import { UserRepositoryInMemory } from "../../../../domain/repositories/in-memor
 import { IUserRepository } from "../../../../domain/repositories/interfaces/user-repository.interface";
 import { Encryption } from "../../../../infrastructure/providers/encryption";
 import { IEncryption } from "../../../../infrastructure/providers/encryption/interface";
+import { Tokenization } from "../../../../infrastructure/providers/tokenization";
 import { IUserService, UserService } from "../../../services/user-service";
 import { CreateUserUseCase, ICreateUserUseCase } from "./create-user.use-case";
 
@@ -9,13 +10,15 @@ let sut: ICreateUserUseCase;
 let service: IUserService;
 let repository: IUserRepository;
 let encryptionProvider: IEncryption;
+let tokenizationProvider: ITokenization;
 
 describe("Create User use case", () => {
 
     beforeEach(() => {
         repository = new UserRepositoryInMemory();
         encryptionProvider = new Encryption();
-        service = new UserService(repository, encryptionProvider);
+        tokenizationProvider = new Tokenization(String(process.env.SECRET), Number(process.env.expiresIn));
+        service = new UserService(repository, encryptionProvider, tokenizationProvider);
         sut = new CreateUserUseCase(service);
     })
 

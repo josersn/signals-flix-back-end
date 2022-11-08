@@ -3,6 +3,7 @@ import { UserService } from "../../application/services/user-service";
 import { CreateUserUseCase } from "../../application/use-cases/users/create-user/create-user.use-case";
 import { UserRepository } from "../database/prisma/repositories/users-repository.prisma";
 import { Encryption } from "../providers/encryption";
+import { Tokenization } from "../providers/tokenization";
 
 @Controller("users")
 export default class UserController {
@@ -12,7 +13,8 @@ export default class UserController {
         try {
             const repository = new UserRepository();
             const encryptionProvider = new Encryption();
-            const service = new UserService(repository, encryptionProvider);
+            const tokenizationProvider = new Tokenization(String(process.env.SECRET), Number(process.env.expiresIn));
+            const service = new UserService(repository, encryptionProvider, tokenizationProvider);
             const useCase = new CreateUserUseCase(service);
 
             const user = await useCase.exec(req.body);
