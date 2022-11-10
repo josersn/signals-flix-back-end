@@ -17,7 +17,8 @@
   },
   "scripts": {
     "test": "jest",
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts"
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/index.ts",
+    "start": "ts-node src/index.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
