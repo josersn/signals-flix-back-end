@@ -1,5 +1,6 @@
 import { IUserRepository, UserDTO } from "../../domain/repositories/interfaces/user-repository.interface";
 import { IEncryption } from "../../infrastructure/providers/encryption/interface";
+import { ITokenization } from "../../infrastructure/providers/tokenization/interface";
 
 interface IUserService {
     create(data: UserDTO): Promise<UserDTO>

@@ -1,5 +1,5 @@
 import { Controller, POST } from "fastify-decorators";
-import { FastifyRequest, FastifyReply } from "fastify";
+import { FastifyReply } from "fastify";
 import { IUserRepository } from "../../domain/repositories/interfaces/user-repository.interface";
 import { IEncryption } from "../providers/encryption/interface";
 import { IUserService, UserService } from "../../application/services/user-service";
@@ -7,6 +7,7 @@ import { UserRepository } from "../database/prisma/repositories/users-repository
 import { Encryption } from "../providers/encryption";
 import { Tokenization } from "../providers/tokenization";
 import { AuthLoginUseCase } from "../../application/use-cases/auth/auth-login.use-case";
+import { ITokenization } from "../providers/tokenization/interface";
 
 @Controller("/auth")
 export default class AuthController {

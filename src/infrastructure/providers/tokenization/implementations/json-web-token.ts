@@ -1,4 +1,5 @@
 import jwt from "jsonwebtoken";
+import { ITokenization } from "../interface";
 
 class JsonWebTokenProvider implements ITokenization {
 
