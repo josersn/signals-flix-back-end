@@ -14,14 +14,15 @@ let encryptionProvider: IEncryption;
 let tokenizationProvider: ITokenization;
 let sut: IAuthLoginUseCase;
 
-
+const mock_secret = "MOCK_SECRET";
+const mock_expiresIn = "300";
 
 describe("Auth Login User case", () => {
 
     beforeEach(() => {
         repository = new UserRepositoryInMemory();
         encryptionProvider = new Encryption();
-        tokenizationProvider = new Tokenization(String(process.env.SECRET), Number(process.env.expiresIn));
+        tokenizationProvider = new Tokenization(String(mock_secret), Number(mock_expiresIn));
         service = new UserService(repository, encryptionProvider, tokenizationProvider);
         createUserUseCase = new CreateUserUseCase(service);
         sut = new AuthLoginUseCase(service);

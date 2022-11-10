@@ -5,7 +5,7 @@ interface IUserService {
     create(data: UserDTO): Promise<UserDTO>
     findByEmail(email: string): Promise<UserDTO | undefined>
     comparePassword(password: string, hash): Promise<Boolean>
-    generateToken(payload: any): Promise<any>
+    generateToken(payload: any): Promise<string>
 }
 
 class UserService implements IUserService {
@@ -39,7 +39,7 @@ class UserService implements IUserService {
         return this.encryptionProvider.decrypt(password, hash);
     }
 
-    async generateToken(payload: any): Promise<any> {
+    async generateToken(payload: any): Promise<string> {
         return this.tokenizationProvider.sign(payload)
     }
 }
