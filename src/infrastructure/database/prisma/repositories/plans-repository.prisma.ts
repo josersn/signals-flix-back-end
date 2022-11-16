@@ -5,14 +5,14 @@ import { IPlansRepository, PlanDTO } from "../../../../domain/repositories/inter
 class PlansRepositoryPrisma implements IPlansRepository {
 
     find(): Promise<Plan[]> {
-        // @ts-expect-error 
+        // @ts-ignore 
         return prismaClient.plans.findMany();
     }
 
     async save(data: PlanDTO): Promise<Plan> {
-        // @ts-expect-error 
+        // @ts-ignore 
         return prismaClient.plans.create({
-            // @ts-expect-error 
+            // @ts-ignore 
             data
         })
     }

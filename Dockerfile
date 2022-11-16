@@ -1,13 +1,18 @@
-FROM node:18.12.0-alpine
+FROM node:16.14-alpine
 
-LABEL maintainer="José Ramos <nettorammos@hotmail.com>"
-
+# Set the working directory
 WORKDIR /usr/src/app
 
-COPY --chown=node:node package*.json ./
+# Copy source code
+COPY package*.json ./
 
-RUN npm i
+# Running npm install
+RUN npm install && npm install -g ts-node && npm install prisma@4.3.1 -g
 
+# Copy the rest of your app's source code from your host to your image filesystem.
 COPY . .
 
-CMD [ "npm", "run", "start" ]
+# Open the mapped port
+EXPOSE 3000
+
+CMD ["sh", "-c", "prisma generate && prisma migrate dev && prisma db seed && npm run start"]

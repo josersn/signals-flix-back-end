@@ -3,14 +3,14 @@ import { IUserRepository, UserDTO } from "../../../../domain/repositories/interf
 
 class UserRepository implements IUserRepository {
     create(data: UserDTO): Promise<UserDTO> {
-        // @ts-expect-error 
+        // @ts-ignore
         return prismaClient.users.create({
-            // @ts-expect-error 
+            // @ts-ignore
             data
         })
     }
     findBy(where: any): Promise<UserDTO | undefined> {
-        // @ts-expect-error 
+        // @ts-ignore
         return prismaClient.users.findFirst(where);
     }
 }
