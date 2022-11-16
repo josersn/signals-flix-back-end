@@ -1,3 +1,4 @@
+import { ITokenization } from "../interface";
 import { JsonWebTokenProvider } from "./json-web-token";
 
 let lut: ITokenization;
