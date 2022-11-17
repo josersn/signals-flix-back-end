@@ -1,3 +1,5 @@
+[![CI](https://github.com/josersn/signals-flix-back-end/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/josersn/signals-flix-back-end/actions/workflows/main.yml)
+
 [X] Seeds
 [X] Cache
 [X] Redis
