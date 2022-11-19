@@ -34,9 +34,10 @@ export default class AuthController {
             reply.status(201).send(token)
 
         } catch (error: any) {
-            return reply.status(error.code).send({
+            console.log(error)
+            return reply.status(error.code || 500).send({
                 error: true,
-                message: error.message
+                message: error.message || "Internal server error"
             })
         }
     }
